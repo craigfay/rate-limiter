@@ -12,20 +12,16 @@ function serveHttp() {
     if (hitCounts[ip]) hitCounts[ip] += 1;
     else hitCounts[ip] = 1;
 
-    console.log({ ip, hits: hitCounts[ip] })
-
     // Maybe deny their request
     if (hitCounts[ip] > hitsAllowedPerMinute) {
       const tryAgainTime = Math.ceil(hitCounts[ip] / hitsAllowedPerMinute);
       res.writeHead(429);
-      res.end(`
-        You've been rate limited. Try again in ${tryAgainTime} minutes.
-      `.trim());
+      res.end(`You've been rate limited. Try again in ${tryAgainTime} minutes.`);
     }
     
     // Respond Affirmatively
     res.writeHead(200, { 'content-type': 'application/json' });
-    res.end(JSON.stringify({ success: true }));
+    res.end(JSON.stringify(hitCounts, null, 2));
   })
   s.listen(5000, () => console.log('listening...'));
 }

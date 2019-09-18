@@ -3,7 +3,7 @@ services:
   node:
     image: node:12
     ports:
-      - "80:5000"
+      - "80:80"
     command: node main
     volumes:
       - './main.js:/main.js'

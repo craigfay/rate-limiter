@@ -23,7 +23,7 @@ function serveHttp() {
     res.writeHead(200, { 'content-type': 'application/json' });
     res.end(JSON.stringify(hitCounts, null, 2));
   })
-  s.listen(5000, () => console.log('listening...'));
+  s.listen(80, () => console.log('listening...'));
 }
 
 // Decrease Hit Counter

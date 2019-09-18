@@ -27,7 +27,7 @@ function serveHttp() {
     res.writeHead(200, { 'content-type': 'application/json' });
     res.end(JSON.stringify({ success: true }));
   })
-  s.listen(5000);
+  s.listen(5000, () => console.log('listening...'));
 }
 
 // Decrease Hit Counter

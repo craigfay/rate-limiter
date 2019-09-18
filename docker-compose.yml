@@ -1,0 +1,9 @@
+version: '3'
+services:
+  node:
+    image: node:12
+    ports:
+      - "5000:80"
+    command: node main
+    volumes:
+      - './main.js:/main.js'

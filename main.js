@@ -20,7 +20,7 @@ function serveHttp() {
       res.writeHead(429);
       res.end(`
         You've been rate limited. Try again in ${tryAgainTime} minutes.
-      `);
+      `.trim());
     }
     
     // Respond Affirmatively

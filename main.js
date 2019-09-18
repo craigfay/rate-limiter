@@ -1,16 +1,17 @@
 const { createServer } = require('http');
 
-// How many times clients have made requests recently
+// Count client requests made recently
 const hitCounts = {};
 const hitsAllowedPerMinute = 50;
+const hitCeiling = 1000;
 
 // Start Http Server
 function serveHttp() {
   const s = createServer(function(req, res) {
     // Increase client's hit count
     const ip = req.connection.remoteAddress;
-    if (hitCounts[ip]) hitCounts[ip] += 1;
-    else hitCounts[ip] = 1;
+    if (!hitCounts[ip]) hitCounts[ip] = 1;
+    if (hitCounts[ip] < hitCeiling) hitCounts[ip] += 1;
 
     // Maybe deny their request
     if (hitCounts[ip] > hitsAllowedPerMinute) {
